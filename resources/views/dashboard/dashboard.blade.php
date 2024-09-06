@@ -14,7 +14,7 @@
             <div class="py-12">
                 <div class="mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white p-5 shadow-lg rounded-lg">
-                        @include('dashboard.partials.welcome')
+                        <x-welcome />
                         <x-hero-counter />
                     </div>
                 </div>
