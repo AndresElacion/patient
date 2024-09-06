@@ -1,6 +1,6 @@
-<div class="min-h-screen flex flex-col sm:flex-row bg-gray-100 shadow-lg">
+<div class="min-h-screen flex flex-col bg-gray-100 shadow-lg">
     <!-- Sidebar - hidden on small screens by default -->
-     <div class="w-full lg:w-56 bg-white overflow-hidden lg:flex lg:flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 -translate-x-full lg:relative fixed">
+     <div class="w-56 bg-white overflow-hidden hidden lg:block">
         <div class="px-6 py-10 flex flex-col">
           <div class="h-auto">
             <!-- Sidebar Links -->
