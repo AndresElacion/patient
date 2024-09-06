@@ -16,6 +16,7 @@
                     <div class="bg-white p-5 shadow-lg rounded-lg">
                         <x-welcome />
                         <x-hero-counter />
+                        <x-patient-management />
                     </div>
                 </div>
             </div>
