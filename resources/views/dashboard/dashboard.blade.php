@@ -4,16 +4,18 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-    <div class="flex h-screen overflow-hidden">
+
+    <div class="flex h-screen">
+        <!-- Sidebar for larger screens -->
         <x-side-nav />
-        <div class="flex-1">
-            <div class="py-12 mr-60">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-lg rounded-lg">
-                        <div class="m-5">
-                            @include('dashboard.partials.welcome')
-                            <x-hero-counter />
-                        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 justify-center items-center">
+            <div class="py-12">
+                <div class="mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white p-5 shadow-lg rounded-lg">
+                        @include('dashboard.partials.welcome')
+                        <x-hero-counter />
                     </div>
                 </div>
             </div>
