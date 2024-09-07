@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('contactNumber');
             $table->string('gender');
             $table->string('occupation')->nullable();
+            $table->string('specialty')->nullable();
+            $table->string('department')->nullable();
             $table->string('address');
             $table->string('image')->nullable();
             $table->string('email')->unique();

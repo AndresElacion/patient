@@ -59,24 +59,39 @@
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
 
-            <!-- Role and specialty -->
-            <div x-data="{ roleId: '{{ old('role_id')}}'}" class="flex gap-5">
-                <div>
-                    <x-input-label for="role_id" :value="__('Role')" />
-                    <select name="role_id" id="role_id" x-model="roleId" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>    
-                        @endforeach
-                    </select>
-                    <x-input-error :messages="$errors->get('role')" class="mt-2" />
-                </div>
-    
-                <!-- Specialty -->
-                <div x-show="roleId == 2">
-                    <x-input-label for="occupation" :value="__('Specialty')" />
-                    <x-text-input id="occupation" class="block w-full" type="text" name="occupation" :value="old('occupation')" required />
-                    <x-input-error :messages="$errors->get('occupation')" class="mt-2" />
-                </div>
+        </div>
+
+        <!-- Role, specialty and department-->
+        <div x-data="{ roleId: '{{ old('role_id')}}'}" class="flex gap-5 mt-5">
+            <div>
+                <x-input-label for="role_id" :value="__('Role')" />
+                <select name="role_id" id="role_id" x-model="roleId" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                    @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>    
+                    @endforeach
+                </select>
+                <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            </div>
+
+            <!-- Department -->
+            <div x-show="roleId == 2">
+                <x-input-label for="department" :value="__('Department')" />
+                <x-text-input id="department" class="block w-full" type="text" name="department" :value="old('department')" />
+                <x-input-error :messages="$errors->get('department')" class="mt-2" />
+            </div>
+
+            <!-- Specialty -->
+            <div x-show="roleId == 2">
+                <x-input-label for="specialty" :value="__('Specialty')" />
+                <x-text-input id="specialty" class="block w-full" type="text" name="specialty" :value="old('specialty')" />
+                <x-input-error :messages="$errors->get('specialty')" class="mt-2" />
+            </div>
+
+            <!-- Occupation -->
+            <div x-show="roleId == 3">
+                <x-input-label for="occupation" :value="__('Occupation')" />
+                <x-text-input id="occupation" class="block w-full" type="text" name="occupation" :value="old('occupation')" />
+                <x-input-error :messages="$errors->get('occupation')" class="mt-2" />
             </div>
         </div>
 
