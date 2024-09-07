@@ -1,14 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
+    // 2 = doctor, 3 = patient
+    $totalDoctors = User::where('role_id', 2)->count();
+    $totalPatients = User::where('role_id', 3)->count();
+
+    // Pass the variables to the dashboard view
+    return view('dashboard.dashboard', compact(
+        'totalDoctors',
+        'totalPatients',
+    ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
