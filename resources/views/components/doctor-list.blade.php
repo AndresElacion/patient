@@ -12,42 +12,40 @@
         </header>
 
         <div class="rounded-lg border border-gray-200">
-            <div class="overflow-x-auto rounded-t-lg">
-              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                <thead class="ltr:text-left rtl:text-right">
+          <div class="overflow-x-auto rounded-t-lg">
+            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+              <thead class="ltr:text-left rtl:text-right">
+                <tr>
+                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
+                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Department</th>
+                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Specialty</th>
+                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+                </tr>
+              </thead>
+        
+              <tbody class="divide-y divide-gray-200 text-center">
+                @foreach ( $doctors as $doctor)
                   <tr>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Specialty</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->name }}</td>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->department }}</td>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->occupation }}</td>
+                    <td class="whitespace-nowrap px-4 py-4 text-gray-700">
+                        @if (true) {{-- Change this to logged in doctor --}}
+                          <span class="inline-block w-3 h-3 mr-2 border border-green-600 bg-green-500 animate-pulse rounded-full"></span>
+                          Online
+                        @else
+                          <span class="inline-block w-3 h-3 mr-2 border border-gray-600 bg-gray-500 rounded-full"></span>
+                          Online
+                        @endif
+                    </td>
                   </tr>
-                </thead>
-          
-                <tbody class="divide-y divide-gray-200 text-center">
-                  @foreach ( $doctors as $doctor)
-                    <tr>
-                      <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->name }}</td>
-                      <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->occupation }}</td>
-                      <td class="whitespace-nowrap px-4 py-4 text-gray-700">
-                          @if (true) {{-- Change this to logged in doctor --}}
-                            <span class="inline-block w-3 h-3 mr-2 border border-green-600 bg-green-500 animate-pulse rounded-full"></span>
-                            Online
-                          @else
-                            <span class="inline-block w-3 h-3 mr-2 border border-gray-600 bg-gray-500 rounded-full"></span>
-                            Online
-                          @endif
-                      </td>
-                    </tr>
-                  @endforeach
-                  
-
-                  
-                </tbody>
-              </table>
-            </div>
-          
-            <div class="rounded-b-lg border-t border-gray-200 px-4 py-2">
-              {{-- This goes for pagination --}}
-            </div>
+                @endforeach
+                
+  
+                
+              </tbody>
+            </table>
+          </div>
         </div> 
     </div>
 </section>

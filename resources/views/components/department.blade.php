@@ -12,41 +12,23 @@
         </header>
 
         <div class="rounded-lg border border-gray-200">
-            <div class="overflow-x-auto rounded-t-lg">
-              <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                <thead>
+          <div class="overflow-x-auto rounded-t-lg">
+            <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+              <thead>
+                <tr>
+                  <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
+                </tr>
+              </thead>
+        
+              <tbody class="divide-y divide-gray-200 text-center">
+                @foreach ($departments as $department)
                   <tr>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $department->department }}</td>
                   </tr>
-                </thead>
-          
-                <tbody class="divide-y divide-gray-200 text-center">
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">General Physician</td>
-                  </tr>
-
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">General Physician</td>
-                  </tr>
-
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">General Physician</td>
-                  </tr>
-
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">General Physician</td>
-                  </tr>
-
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">General Physician</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          
-            <div class="rounded-b-lg border-t border-gray-200 px-4 py-2">
-              {{-- This goes for pagination --}}
-            </div>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div> 
     </div>
 </section>

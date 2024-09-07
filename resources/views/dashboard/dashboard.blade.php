@@ -21,7 +21,9 @@
                             :doctors="$doctors"
                             :total-doctors="$totalDoctors"
                         />
-                        <x-department />
+                        <x-department 
+                            :departments="$departments"
+                        />
                     </div>
                 </div>
             </div>

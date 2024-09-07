@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
     $totalPatients = User::where('role_id', 3)->count();
     $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
     $patients = User::orderBy('created_at', 'DESC')->where('role_id', 3)->take(5)->get();
-    // $patientsQuery = User::where('role_id', 3)->get();
+    $departments = User::orderBy('department', 'DESC')->take(5)->get();
 
     // Pass the variables to the dashboard view
     return view('dashboard.dashboard', compact(
@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
         'totalPatients',
         'doctors',
         'patients',
-        // 'patientsQuery'
+        'departments'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
