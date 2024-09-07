@@ -45,13 +45,6 @@
                 <x-input-error :messages="$errors->get('gender')" class="mt-2" />
             </div>
 
-            <!-- Occupation -->
-            <div>
-                <x-input-label for="occupation" :value="__('Occupation')" />
-                <x-text-input id="occupation" class="block mt-1 w-full" type="text" name="occupation" :value="old('occupation')" required />
-                <x-input-error :messages="$errors->get('occupation')" class="mt-2" />
-            </div>
-
             <!-- Address -->
             <div>
                 <x-input-label for="address" :value="__('Address')" />
@@ -66,15 +59,24 @@
                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
             </div>
 
-            <!-- Role -->
-            <div>
-                <x-input-label for="role_id" :value="__('Role')" />
-                <select name="role_id" id="role_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                    @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>    
-                    @endforeach
-                </select>
-                <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            <!-- Role and specialty -->
+            <div x-data="{ roleId: '{{ old('role_id')}}'}" class="flex gap-5">
+                <div>
+                    <x-input-label for="role_id" :value="__('Role')" />
+                    <select name="role_id" id="role_id" x-model="roleId" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>    
+                        @endforeach
+                    </select>
+                    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+                </div>
+    
+                <!-- Specialty -->
+                <div x-show="roleId == 2">
+                    <x-input-label for="occupation" :value="__('Specialty')" />
+                    <x-text-input id="occupation" class="block w-full" type="text" name="occupation" :value="old('occupation')" required />
+                    <x-input-error :messages="$errors->get('occupation')" class="mt-2" />
+                </div>
             </div>
         </div>
 
