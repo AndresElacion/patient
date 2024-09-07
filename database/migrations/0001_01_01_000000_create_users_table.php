@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->string('userType'); // Doctor, Patient, Staff, Admin
             $table->string('name');
             $table->integer('age');
             $table->date('dateOfBirth');
