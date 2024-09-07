@@ -1,6 +1,6 @@
-<div class="bg-white shadow-lg">
+<div class="bg-white shadow-lg pt-16">
     <!-- Sidebar - hidden on small screens by default -->
-     <div class="w-56 bg-white hidden lg:block">
+     <div class="w-56 bg-white hidden lg:block lg:fixed lg:h-full">
         <div class="px-6 py-10">
           <div class="">
             <!-- Sidebar Links -->
