@@ -25,7 +25,6 @@ class UserFactory extends Factory
     {
         return [
             'role_id' => 1,
-            'userType' => 'Admin',
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'age' => 12,
