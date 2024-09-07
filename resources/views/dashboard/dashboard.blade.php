@@ -15,7 +15,10 @@
                     />
                     <x-patient-management />
                     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                        <x-doctor-list />
+                        <x-doctor-list 
+                            :doctors="$doctors"
+                            :total-doctors="$totalDoctors"
+                        />
                         <x-department />
                     </div>
                 </div>
