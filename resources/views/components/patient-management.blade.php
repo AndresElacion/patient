@@ -2,7 +2,7 @@
     <div class="bg-white shadow-lg hidden sm:block rounded-xl border border-slate-200 relative">
         <header class="px-5 flex justify-between items-center">
           <div>
-            <h2 class="font-semibold text-slate-800 uppercase">Patient: <span class="text-slate-500 text-xl">1</span></h2>
+            <h2 class="font-semibold text-slate-800 uppercase">Patient List: <span class="text-slate-500 text-xl">1</span></h2>
           </div>
             <div>
                 <form action="#">

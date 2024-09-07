@@ -12,11 +12,13 @@ Route::get('/dashboard', function () {
     // 2 = doctor, 3 = patient
     $totalDoctors = User::where('role_id', 2)->count();
     $totalPatients = User::where('role_id', 3)->count();
+    $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
 
     // Pass the variables to the dashboard view
     return view('dashboard.dashboard', compact(
         'totalDoctors',
         'totalPatients',
+        'doctors'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
