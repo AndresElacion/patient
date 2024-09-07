@@ -13,7 +13,9 @@
                         :total-doctors="$totalDoctors" 
                         :total-patients="$totalPatients" 
                     />
-                    <x-patient-management />
+                    <x-patient-management 
+                        :patients="$patients"
+                    />
                     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         <x-doctor-list 
                             :doctors="$doctors"

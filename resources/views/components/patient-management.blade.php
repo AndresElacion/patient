@@ -38,24 +38,26 @@
                   <tr>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Name</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Date of Birth</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Type</th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Status</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Age</th>
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Action</th>
                   </tr>
                 </thead>
           
                 <tbody class="divide-y divide-gray-200 text-center">
-                  <tr>
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">John Doe</td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">24/05/1995</td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">General Check-up</td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">In-Progress</td>
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                      <a href="#" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
-                        View
-                      </a>
-                  </td>
-                  </tr>
+                  @foreach ( $patients as $patient )
+                    <tr>
+                      <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $patient->name }}</td>
+                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $patient->dateOfBirth}}</td>
+                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $patient->age }}</td>
+                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $patient->gender }}</td>
+                      <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                        <a href="#" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
+                          View
+                        </a>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
