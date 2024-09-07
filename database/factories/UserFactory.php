@@ -32,6 +32,8 @@ class UserFactory extends Factory
             'contactNumber' => '89123123',
             'gender' => 'male',
             'occupation' => 'Doctor',
+            'specialty' => 'treatment of brain',
+            'department' => 'Neurology',
             'address' => 'sample address',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
