@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepartmetController;
+use App\Http\Controllers\DoctorController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,12 @@ Route::get('/dashboard', function () {
         'departments'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.index'); // List doctors
+    Route::get('/doctor/{id}/edit', [DoctorController::class, 'edit'])->name('doctor.edit'); // Edit specific doctor
+    Route::patch('/doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update'); // Update specific doctor
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
