@@ -46,7 +46,11 @@ class User extends Authenticatable
         return $this->hasMany(Role::class, 'user_id');
     }
 
-    public function attendance() : HasMany {
+    public function attendances() : HasMany {
         return $this->hasMany(Attendance::class, 'user_id');
+    }
+
+    public function lastAttendance() {
+        return $this->attendances()->lastest()->first();
     }
 }

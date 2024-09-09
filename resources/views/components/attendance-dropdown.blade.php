@@ -2,31 +2,26 @@
     <!-- Button and Dropdown -->
     <button @click="toggleDropdown()" class="rounded-lg block px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md w-48">
         <span x-text="selectedText"></span>
-        <svg class="w-4 h-4 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 0" stroke="currentColor">
+        <svg class="w-4 h-4 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
     </button>
 
     <!-- Dropdown Menu -->
     <ul x-show="open" @click.away="open = false" class="absolute mt-12 w-48 bg-white rounded-lg shadow-lg border border-gray-300">
-        <li @click="startTimer('login', 'Login', 60); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-t-lg cursor-pointer">Login</li>
-        <li @click="startTimer('break1', 'Break 1', 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 1 (1 min)</li>
-        <li @click="startTimer('break2', 'Break 2', 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 2 (1 min)</li>
-        <li @click="startTimer('lunch', 'Lunch', 60); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-b-lg cursor-pointer">Lunch (1 min)</li>
+        <li @click="startTimer('login', 'Login', 0); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-t-lg cursor-pointer">Login</li>
+        <li @click="startTimer('break1', 'Break 1', 15 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 1</li>
+        <li @click="startTimer('break2', 'Break 2', 15 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 2</li>
+        <li @click="startTimer('lunch', 'Lunch', 60 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-b-lg cursor-pointer">Lunch</li>
     </ul>
 
     <!-- Timer Display -->
     <div x-show="timeLeft > 0 && selected !== 'login'" class="mt-4">
         <p class="text-sm text-gray-700">Time Remaining: <span x-text="formattedTime"></span></p>
     </div>
-
-    <!-- Overbreak Warning -->
-    <div x-show="overbreak" class="mt-2">
-        <p class="text-red-500 text-sm">You have exceeded the break/lunch time!</p>
-    </div>
     
     <!-- Hidden Form -->
-    <form id="attendanceForm" action="{{ route('attendance.store') }}" method="POST" x-ref="form">
+    <form x-ref="form" action="{{ route('attendance.store') }}" method="POST">
         @csrf
         <input type="hidden" name="status" x-bind:value="selected">
         <input type="hidden" name="overbreak" x-bind:value="overbreak ? 'true' : 'false'">
@@ -35,91 +30,116 @@
 
 <script>
     function attendanceTimer() {
-        return {
-            open: false,
-            selected: 'login',
-            selectedText: 'Login',
-            timeLeft: 0,
-            timerInterval: null,
-            overbreak: false,
-            onBreakOrLunch: false, // Track if currently on break/lunch
+    return {
+        open: false,
+        selected: 'login',
+        selectedText: 'Login',
+        timeLeft: 0,
+        timerInterval: null,
+        overbreak: false,
+        hasStarted: false, // Add this flag
 
-            // Toggle Dropdown
-            toggleDropdown() {
-                this.open = !this.open;
-            },
+        init() {
+            // Load saved state from localStorage
+            const savedState = JSON.parse(localStorage.getItem('attendanceTimerState'));
+            if (savedState) {
+                this.selected = savedState.selected;
+                this.selectedText = savedState.selectedText;
+                this.timeLeft = savedState.timeLeft;
+                this.overbreak = savedState.overbreak;
 
-            // Start Timer and initialize countdown based on selected status
-            startTimer(status, text, time) {
-                if (status === 'login') {
-                    this.handleLoginWhileOnBreakOrLunch();
-                    return;
+                if (this.timeLeft > 0) {
+                    this.hasStarted = true; // Set flag to true
+                    this.startTimer(this.selected, this.selectedText, this.timeLeft, true);
                 }
-                this.selected = status;
-                this.selectedText = text;
-                this.timeLeft = time;
-                this.overbreak = false;
-                this.onBreakOrLunch = status !== 'login'; // Mark as on break/lunch
+            }
+        },
 
-                // Clear any existing timer intervals
-                clearInterval(this.timerInterval);
+        // Toggle Dropdown
+        toggleDropdown() {
+            this.open = !this.open;
+        },
 
-                // Start a countdown timer
+        // Start Timer
+        startTimer(status, text, time, fromLocalStorage = false) {
+            this.selected = status;
+            this.selectedText = text;
+            this.timeLeft = time;
+            this.overbreak = false;
+
+            clearInterval(this.timerInterval);
+
+            if (this.timeLeft > 0) {
+                if (!fromLocalStorage) {
+                    localStorage.setItem('attendanceTimerState', JSON.stringify({
+                        selected: this.selected,
+                        selectedText: this.selectedText,
+                        timeLeft: this.timeLeft,
+                        overbreak: this.overbreak
+                    }));
+                }
+
                 this.timerInterval = setInterval(() => {
                     if (this.timeLeft > 0) {
                         this.timeLeft--;
+                        localStorage.setItem('attendanceTimerState', JSON.stringify({
+                            selected: this.selected,
+                            selectedText: this.selectedText,
+                            timeLeft: this.timeLeft,
+                            overbreak: this.overbreak
+                        }));
                     } else {
-                        // Flag if the user exceeds the time
                         this.overbreak = true;
                         clearInterval(this.timerInterval);
-                        this.submitAttendance();
+                        localStorage.removeItem('attendanceTimerState');
+                        alert('You have exceeded the break time!');
                     }
                 }, 1000);
-            },
-
-            // Handle login while on break/lunch
-            handleLoginWhileOnBreakOrLunch() {
-                if (this.onBreakOrLunch) {
-                    this.selected = 'login'; // Update status to login
-                    this.selectedText = 'Login'; // Update button text
-                    this.overbreak = false; // No overbreak for login
-                    clearInterval(this.timerInterval); // Stop the timer
-                }
-                this.submitAttendance(); // Submit attendance immediately
-                this.onBreakOrLunch = false; // Reset break/lunch status
-            },
-
-            // Format time as mm:ss
-            get formattedTime() {
-                const minutes = Math.floor(this.timeLeft / 60);
-                const seconds = this.timeLeft % 60;
-                return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            },
-
-            // Submit Form
-            submitAttendance() {
-                const formData = new FormData(this.$refs.form);
-                formData.set('overbreak', this.overbreak ? 'true' : 'false'); // Ensure correct value is set
-                console.log('Form Data:', Object.fromEntries(formData.entries())); // Debug form data
-            
-                fetch(this.$refs.form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                }).then(response => {
-                    if (response.ok) {
-                        console.log('Attendance recorded successfully');
-                    } else {
-                        return response.json().then(data => {
-                            console.error('Failed to record attendance:', data);
-                        });
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
-                });
+            } else {
+                localStorage.removeItem('attendanceTimerState');
             }
-        };
-    }
+
+            if (!fromLocalStorage) {
+                this.submitAttendance();
+            }
+        },
+
+        // Format time in mm:ss
+        get formattedTime() {
+            const minutes = Math.floor(this.timeLeft / 60);
+            const seconds = this.timeLeft % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        },
+
+        // Submit Form
+        submitAttendance() {
+            // Reference form using x-ref
+            const form = this.$refs.form;
+            form.querySelector('input[name="status"]').value = this.selected;
+            form.querySelector('input[name="overbreak"]').value = this.overbreak ? 'true' : 'false';
+            
+            // Submit form via AJAX
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Attendance recorded successfully');
+                } else {
+                    return response.json().then(data => {
+                        console.error('Failed to record attendance:', data);
+                    });
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    };
+}
+
 </script>

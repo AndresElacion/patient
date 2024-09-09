@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\DepartmetController;
-use App\Http\Controllers\DoctorController;
 use App\Models\User;
+use App\Models\Attendance;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DepartmetController;
+use App\Http\Controllers\AttendanceController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -17,6 +19,23 @@ Route::get('/dashboard', function () {
     $totalPatients = User::where('role_id', 3)->count();
     $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
     $patients = User::orderBy('created_at', 'DESC')->where('role_id', 3)->take(5)->get();
+
+    // Fetch the latest attendance status for doctors
+    $doctors = User::with(['attendances' => function ($query) {
+        $query->latest()->limit(1);
+    }])
+    ->where('role_id', 2)
+    ->orderBy('created_at', 'DESC')
+    ->take(5)
+    ->get()
+    ->map(function ($doctor) {
+        // Determine the status based on the latest attendance record
+        $latestAttendance = $doctor->attendances->first();
+        $doctor->status = $latestAttendance ? $latestAttendance->status : 'offline';
+        return $doctor;
+    });
+
+
     $departments = User::orderBy('department', 'DESC')->take(5)->get();
 
     // Pass the variables to the dashboard view
@@ -25,7 +44,7 @@ Route::get('/dashboard', function () {
         'totalPatients',
         'doctors',
         'patients',
-        'departments'
+        'departments',
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 

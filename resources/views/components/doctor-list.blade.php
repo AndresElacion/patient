@@ -30,14 +30,24 @@
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->department }}</td>
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $doctor->occupation }}</td>
                     <td class="whitespace-nowrap px-4 py-4 text-gray-700">
-                        @if (true) {{-- Change this to logged in doctor --}}
+                      @if ($doctor->status === 'login')
                           <span class="inline-block w-3 h-3 mr-2 border border-green-600 bg-green-500 animate-pulse rounded-full"></span>
                           Online
-                        @else
+                      @elseif ($doctor->status === 'break1')
+                          <span class="inline-block w-3 h-3 mr-2 border border-yellow-600 bg-yellow-500 rounded-full"></span>
+                          Break 1
+                      @elseif ($doctor->status === 'break2')
+                          <span class="inline-block w-3 h-3 mr-2 border border-yellow-600 bg-yellow-500 rounded-full"></span>
+                          Break 2
+                      @elseif ($doctor->status === 'lunch')
+                          <span class="inline-block w-3 h-3 mr-2 border border-orange-600 bg-orange-500 rounded-full"></span>
+                          Lunch
+                      @else
                           <span class="inline-block w-3 h-3 mr-2 border border-gray-600 bg-gray-500 rounded-full"></span>
-                          Online
-                        @endif
-                    </td>
+                          Offline
+                      @endif
+                  </td>
+                  
                   </tr>
                 @endforeach
               </tbody>
