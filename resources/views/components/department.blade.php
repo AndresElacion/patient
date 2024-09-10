@@ -23,7 +23,7 @@
               <tbody class="divide-y divide-gray-200 text-center">
                 @foreach ($departments as $department)
                   <tr>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $department->department }}</td>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $department->id }} {{ $department->department }}</td>
                   </tr>
                 @endforeach
               </tbody>
