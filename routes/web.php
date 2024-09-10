@@ -36,7 +36,7 @@ Route::get('/dashboard', function () {
     });
 
 
-    $departments = User::orderBy('department', 'DESC')->take(5)->get();
+    $departments = User::select('department')->distinct()->orderBy('department', 'DESC')->get();
 
     // Pass the variables to the dashboard view
     return view('dashboard.dashboard', compact(
