@@ -49,6 +49,19 @@
                         </div>
                     </header>
                 </div>
+
+                <div class="bg-white p-8 shadow-2xl rounded-xl mt-5">
+                    <x-patient-note 
+                        :patient="$patient"
+                    />
+                </div>
+
+                <div class="bg-white p-8 shadow-2xl rounded-xl mt-5">
+                    <h3 class="text-sm text-gray-500 uppercase">Notes</h3>
+                    <p class="text-lg text-gray-800">{{ $patient->notes }}</p>
+                    <p class="text-lg text-gray-800">{{ $patient->updated_at->diffForHumans() }}</p>
+                </div>
+                
             </div>
         </div>
     </div>

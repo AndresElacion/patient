@@ -21,4 +21,16 @@ class PatientController extends Controller
         
         return view('patient.profile', compact('patient'));
     }
+
+    public function update(Request $request, $id) {
+        $formFields = $request->validate([
+            'notes' => ['nullable','string'],
+        ]);
+
+        $patient = User::find($id);
+
+        $patient->update($formFields);
+
+        return redirect()->back();
+    }
 }

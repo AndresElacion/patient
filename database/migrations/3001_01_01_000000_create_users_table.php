@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('occupation')->nullable();
             $table->string('specialty')->nullable();
             $table->string('department')->nullable();
+            $table->longtext('notes')->nullable();
             $table->string('address');
             $table->string('image')->nullable();
             $table->string('email')->unique();
