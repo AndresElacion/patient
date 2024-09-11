@@ -8,6 +8,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartmetController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\PatientController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -50,8 +51,13 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.index'); // List doctors
-    Route::get('/doctor/{id}/edit', [DoctorController::class, 'edit'])->name('doctor.edit'); // Edit specific doctor
+    Route::get('/doctor/{id}/edit', [DoctorController::class, 'edit'])->name('doctor.edit'); // View profile specific doctor
     Route::patch('/doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update'); // Update specific doctor
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/patients', [PatientController::class, 'index'])->name('patient.index'); // List patients
+    Route::get('/patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit'); // View profile specific patient
 });
 
 Route::middleware('auth')->group(function () {
