@@ -32,7 +32,6 @@
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Age</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Gender</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Department</th>
-                            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Specialty</th>
                             <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Action</th>
                         </tr>
                     </thead>
@@ -45,7 +44,6 @@
                                 <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.age"></td>
                                 <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.gender"></td>
                                 <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.department"></td>
-                                <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.specialty"></td>
                                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                                     <a :href="`/patient/${patient.id}/edit`" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
                                         View

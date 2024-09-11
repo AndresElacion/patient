@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/patients', [PatientController::class, 'index'])->name('patient.index'); // List patients
     Route::get('/patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit'); // View profile specific patient
+    Route::patch('/patient/{id}/notes', [PatientController::class, 'update'])->name('patient.update');
 });
 
 Route::middleware('auth')->group(function () {
