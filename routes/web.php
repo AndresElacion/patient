@@ -35,7 +35,7 @@ Route::get('/dashboard', function () {
         return $doctor;
     });
 
-
+    // Fetch unique departments
     $departments = User::select('department')->distinct()->orderBy('department', 'DESC')->get();
 
     // Pass the variables to the dashboard view
