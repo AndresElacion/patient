@@ -13,6 +13,7 @@
         <li @click="startTimer('break1', 'Break 1', 15 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 1</li>
         <li @click="startTimer('break2', 'Break 2', 15 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Break 2</li>
         <li @click="startTimer('lunch', 'Lunch', 60 * 60); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-b-lg cursor-pointer">Lunch</li>
+        <li @click="startTimer('logout', 'Logout', 0); open = false" class="px-4 py-2 hover:bg-gray-100 rounded-t-lg cursor-pointer">Logout</li>
     </ul>
 
     <!-- Timer Display -->
