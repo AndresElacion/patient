@@ -48,6 +48,9 @@
                                     <a :href="`/patient/${patient.id}/edit`" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
                                         View
                                     </a>
+                                    <a :href="`/patients/${patient.id}/billing`" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
+                                        Bill
+                                    </a>
                                 </td>
                             </tr>
                         </template>

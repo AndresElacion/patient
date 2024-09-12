@@ -8,6 +8,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartmetController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\StaffController;
 
@@ -70,6 +71,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
+});
+
+Route::prefix('patients/{patientId}/billing')->middleware('auth')->group(function () {
+    Route::get('/', [BillingController::class, 'index'])->name('billing.index');
+    Route::get('/create', [BillingController::class, 'create'])->name('billing.create');
+    Route::post('/store', [BillingController::class, 'store'])->name('billing.store');
+    Route::patch('/{billId}/update-status', [BillingController::class, 'updateStatus'])->name('billing.updateStatus');
 });
 
 Route::middleware('auth')->group(function () {

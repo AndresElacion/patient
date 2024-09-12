@@ -50,6 +50,10 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class, 'user_id');
     }
 
+    public function bills() : HasMany {
+        return $this->hasMany(Billing::class);
+    }
+
     public function lastAttendance() {
         return $this->attendances()->lastest()->first();
     }
