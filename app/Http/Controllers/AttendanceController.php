@@ -18,7 +18,7 @@ class AttendanceController extends Controller
     public function store(Request $request) {
 
         $formFields = $request->validate([
-            'status' => 'required|in:login,break1,break2,lunch',
+            'status' => 'required|in:login,break1,break2,lunch,logout',
             'overbreak' => 'required|in:true,false',
         ]);
 
