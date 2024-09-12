@@ -27,7 +27,7 @@
                 </svg>
             </div>
         </div>
-        <p class="text-4xl font-extrabold text-slate-900">1</p>
+        <p class="text-4xl font-extrabold text-slate-900">{{ $totalAppointment }}</p>
         <hr class="my-4 border-gray-300">
     </div>
     

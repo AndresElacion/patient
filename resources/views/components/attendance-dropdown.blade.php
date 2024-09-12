@@ -1,4 +1,4 @@
-<div x-data="attendanceTimer()" class="relative flex justify-end mb-5 z-50">
+<div x-data="attendanceTimer()" class="relative flex justify-end mb-5 z-10">
     <!-- Button and Dropdown -->
     <button @click="toggleDropdown()" class="rounded-lg block px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-md w-48">
         <span x-text="selectedText"></span>

@@ -21,6 +21,7 @@ Route::get('/dashboard', function () {
     // 2 = doctor, 3 = patient
     $totalDoctors = User::where('role_id', 2)->count();
     $totalPatients = User::where('role_id', 3)->count();
+    $totalAppointment = Billing::where('status', 'pending')->count();
     $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
     $patients = User::orderBy('created_at', 'DESC')->where('role_id', 3)->take(5)->get();
     $totalRevenue = Billing::where('status', 'paid')->sum('amount');
@@ -50,7 +51,8 @@ Route::get('/dashboard', function () {
         'doctors',
         'patients',
         'departments',
-        'totalRevenue'
+        'totalRevenue',
+        'totalAppointment'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
