@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartmetController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\StaffController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -59,6 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/patients', [PatientController::class, 'index'])->name('patient.index'); // List patients
     Route::get('/patient/{id}/edit', [PatientController::class, 'edit'])->name('patient.edit'); // View profile specific patient
     Route::patch('/patient/{id}/notes', [PatientController::class, 'update'])->name('patient.update');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/staffs', [StaffController::class, 'index'])->name('staff.index'); // List staffs
+    Route::get('/staff/{id}/edit', [StaffController::class, 'edit'])->name('staff.edit'); // View profile specific staff
+    Route::patch('/staff/{id}/notes', [StaffController::class, 'update'])->name('staff.update');
 });
 
 Route::middleware('auth')->group(function () {
