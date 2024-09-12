@@ -1,16 +1,17 @@
 <?php
 
 use App\Models\User;
+use App\Models\Billing;
 use App\Models\Attendance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartmetController;
 use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\BillingController;
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\StaffController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -22,6 +23,7 @@ Route::get('/dashboard', function () {
     $totalPatients = User::where('role_id', 3)->count();
     $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
     $patients = User::orderBy('created_at', 'DESC')->where('role_id', 3)->take(5)->get();
+    $totalRevenue = Billing::where('status', 'paid')->sum('amount');
 
     // Fetch the latest attendance status for doctors
     $doctors = User::with(['attendances' => function ($query) {
@@ -48,6 +50,7 @@ Route::get('/dashboard', function () {
         'doctors',
         'patients',
         'departments',
+        'totalRevenue'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 

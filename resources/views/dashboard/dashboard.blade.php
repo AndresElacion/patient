@@ -12,7 +12,8 @@
                     <!-- Pass data to hero-counter component -->
                     <x-hero-counter 
                         :total-doctors="$totalDoctors" 
-                        :total-patients="$totalPatients" 
+                        :total-patients="$totalPatients"
+                        :total-revenue="$totalRevenue"
                     />
                     <x-patient-management 
                         :patients="$patients"
