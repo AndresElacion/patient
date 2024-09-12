@@ -6,49 +6,49 @@
             <!-- Name -->
             <div>
                 <x-input-label for="name" :value="__('Name')" />
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
     
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Email Address -->
             <div>
                 <x-input-label for="contactNumber" :value="__('Contact Number')" />
-                <x-text-input id="contactNumber" class="block mt-1 w-full" type="text" name="contactNumber" :value="old('contactNumber')" required autocomplete="username" />
+                <x-text-input id="contactNumber" class="block mt-1 w-full" type="text" name="contactNumber" :value="old('contactNumber')" autocomplete="username" />
                 <x-input-error :messages="$errors->get('contactNumber')" class="mt-2" />
             </div>
 
             <!-- Age -->
             <div>
                 <x-input-label for="age" :value="__('Age')" />
-                <x-text-input id="age" class="block mt-1 w-full" type="text" name="age" :value="old('age')" required />
+                <x-text-input id="age" class="block mt-1 w-full" type="text" name="age" :value="old('age')" />
                 <x-input-error :messages="$errors->get('age')" class="mt-2" />
             </div>
 
             <!-- DOB -->
             <div>
                 <x-input-label for="dateOfBirth" :value="__('Date of Birth')" />
-                <x-text-input id="dateOfBirth" class="block mt-1 w-full" type="date" name="dateOfBirth" :value="old('dateOfBirth')" required />
+                <x-text-input id="dateOfBirth" class="block mt-1 w-full" type="date" name="dateOfBirth" :value="old('dateOfBirth')" />
                 <x-input-error :messages="$errors->get('dateOfBirth')" class="mt-2" />
             </div>
 
             <!-- Gender -->
             <div>
                 <x-input-label for="gender" :value="__('Gender')" />
-                <x-text-input id="gender" class="block mt-1 w-full" type="text" name="gender" :value="old('gender')" required />
+                <x-text-input id="gender" class="block mt-1 w-full" type="text" name="gender" :value="old('gender')" />
                 <x-input-error :messages="$errors->get('gender')" class="mt-2" />
             </div>
 
             <!-- Address -->
             <div>
                 <x-input-label for="address" :value="__('Address')" />
-                <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+                <x-text-input id="address" class="block mt-1 w-full" type="text" name="address" :value="old('address')" />
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
 
@@ -100,7 +100,7 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="hidden"
                             name="password"
-                            required autocomplete="new-password"
+                            autocomplete="new-password"
                             value="password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
