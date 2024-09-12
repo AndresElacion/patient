@@ -17,26 +17,10 @@ class Roles extends Seeder
     public function run(): void
     {
         DB::table('roles')->insert([
-            [
-                'name' => 'Admin',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'name' => 'Doctor',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'name' => 'Patient',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'name' => 'Staff',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
+            ['name' => 'Admin', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Doctor', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Patient', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Staff', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ]);
     }
 }
