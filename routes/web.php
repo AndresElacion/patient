@@ -78,11 +78,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/billing/{id}/download', [BillingController::class, 'downloadPdf'])->name('billing.downloadPdf');
+});
+
 Route::prefix('patients/{patientId}/billing')->middleware('auth')->group(function () {
     Route::get('/', [BillingController::class, 'index'])->name('billing.index');
     Route::get('/create', [BillingController::class, 'create'])->name('billing.create');
     Route::post('/store', [BillingController::class, 'store'])->name('billing.store');
     Route::patch('/{billId}/update-status', [BillingController::class, 'updateStatus'])->name('billing.updateStatus');
+    Route::get('/{billId}/download-pdf', [BillingController::class, 'downloadPdf'])->name('billing.downloadPdf');
+
 });
 
 Route::middleware('auth')->group(function () {
