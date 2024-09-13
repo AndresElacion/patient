@@ -49,7 +49,7 @@
                                         View
                                     </a>
                                     <a :href="`/patients/${patient.id}/billing`" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
-                                        Bill
+                                        Appointment
                                     </a>
                                 </td>
                             </tr>
