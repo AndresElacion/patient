@@ -13,7 +13,7 @@
                     <x-hero-counter 
                         :total-doctors="$totalDoctors" 
                         :total-patients="$totalPatients"
-                        :total-revenue="$totalRevenue"
+                        :total-staffs="$totalStaffs"
                         :total-appointment="$totalAppointment"
                     />
                     <x-patient-management 
