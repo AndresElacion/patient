@@ -7,10 +7,15 @@
                 <div class="bg-white p-5 shadow-lg rounded-lg">
                     <div class="">
                         <!-- Billing Create Component -->
-                        <x-billing-create :patient="$patient" />
+                        <x-billing-create 
+                            :patient="$patient"
+                        />
                         
                         <!-- Billing Index Component -->
-                        <x-billing-index :bills="$bills" :patient="$patient" />
+                        <x-billing-index 
+                            :bills="$bills" 
+                            :patient="$patient"
+                        />
                     </div>
                 </div>
             </div>

@@ -16,13 +16,13 @@
                 @foreach($bills as $bill)
                 <tr>
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $bill->service }}</td>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $bill->amount }}</td>
+                    <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">${{ $bill->amount }}</td>
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">{{ $bill->billingDate }}</td>
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
                         @if ($bill->status === 'paid')
-                            <p class="inline-block rounded border border-green-600 bg-green-600 px-4 py-1 text-sm font-medium text-white">PAID</p>
+                            <p class="inline-block rounded-md border border-green-600 bg-green-600 px-4 py-1 text-sm font-medium text-white">PAID</p>
                         @else
-                            <p class="inline-block rounded border border-gray-600 bg-gray-600 px-4 py-1 text-sm font-medium text-white">PENDING</p>
+                            <p class="inline-block rounded-md border border-gray-600 bg-gray-600 px-4 py-1 text-sm font-medium text-white">PENDING</p>
                         @endif
                     </td>
                     <td class="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
@@ -35,6 +35,12 @@
                                 Mark as Paid
                             </button>
                         </form>
+                        @endif
+                    
+                        @if ( $bill->status === 'paid')
+                            <a href="{{ route('billing.downloadPdf', ['patientId' => $patient->id, 'billId' => $bill->id]) }}" class="inline-flex px-4 py-1 bg-indigo-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Download PDF
+                            </a>
                         @endif
                     </td>
                 </tr>

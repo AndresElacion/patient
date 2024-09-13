@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Billing;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BillingController extends Controller
 {
@@ -52,6 +53,21 @@ class BillingController extends Controller
         $bill->save();
     
         return redirect()->back()->with('success', 'Bill marked as paid.');
+    }
+    
+    public function downloadPdf($patientId, $id)
+    {
+        // Fetch the billing record
+        $billing = Billing::findOrFail($id);
+        
+        // Fetch the patient record
+        $patient = User::findOrFail($patientId);
+    
+        // Generate the PDF
+        $pdf = Pdf::loadView('components.billing-pdf', compact('billing', 'patient'));
+    
+        // Download the PDF
+        return $pdf->download('billing-details.pdf');
     }
     
 
