@@ -64,32 +64,20 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Patient')">
+            <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                {{ __('Add Profile') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('patient.index')" :active="request()->routeIs('patient.index')">
                 {{ __('Patient') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Patient Profile')">
-                {{ __('Patient Profile') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Doctor')">
+            <x-responsive-nav-link :href="route('doctor.index')" :active="request()->routeIs('doctor.index')">
                 {{ __('Doctor') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Staff')">
+            <x-responsive-nav-link :href="route('staff.index')" :active="request()->routeIs('staff.index')">
                 {{ __('Staff') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Role')">
-                {{ __('Role') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Department')">
-                {{ __('Department') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('Billing')">
-                {{ __('Billing') }}
             </x-responsive-nav-link>
         </div>
 
