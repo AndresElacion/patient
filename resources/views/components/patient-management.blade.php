@@ -45,7 +45,7 @@
                               <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.gender"></td>
                               <td class="whitespace-nowrap px-4 py-2 text-gray-700" x-text="patient.department"></td>
                               <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                                  <a href="#" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
+                                  <a :href="`/patient/${patient.id}/edit`" class="inline-block rounded bg-blue-500 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700">
                                       View
                                   </a>
                               </td>
