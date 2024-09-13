@@ -18,13 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    // 2 = doctor, 3 = patient
+    // 2 = doctor, 3 = patient, 4 = staffs/nurses
     $totalDoctors = User::where('role_id', 2)->count();
     $totalPatients = User::where('role_id', 3)->count();
+    $totalStaffs = User::where('role_id', 4)->count();
     $totalAppointment = Billing::where('status', 'pending')->count();
     $doctors = User::orderBy('created_at', 'DESC')->where('role_id', 2)->take(5)->get();
     $patients = User::orderBy('created_at', 'DESC')->where('role_id', 3)->take(5)->get();
-    $totalRevenue = Billing::where('status', 'paid')->sum('amount');
 
     // Fetch the latest attendance status for doctors
     $doctors = User::with(['attendances' => function ($query) {
@@ -51,7 +51,7 @@ Route::get('/dashboard', function () {
         'doctors',
         'patients',
         'departments',
-        'totalRevenue',
+        'totalStaffs',
         'totalAppointment'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
