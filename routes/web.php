@@ -88,7 +88,6 @@ Route::prefix('patients/{patientId}/billing')->middleware('auth')->group(functio
     Route::post('/store', [BillingController::class, 'store'])->name('billing.store');
     Route::patch('/{billId}/update-status', [BillingController::class, 'updateStatus'])->name('billing.updateStatus');
     Route::get('/{billId}/download-pdf', [BillingController::class, 'downloadPdf'])->name('billing.downloadPdf');
-
 });
 
 Route::middleware('auth')->group(function () {
