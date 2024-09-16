@@ -1,5 +1,5 @@
 # Use an official PHP image with necessary extensions
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -16,14 +16,19 @@ RUN apt-get update && apt-get install -y \
 # Install Composer manually
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Check PHP and Composer versions
+RUN php -v
+RUN composer --version
+
 # Set working directory
 WORKDIR /var/www/html
 
 # Copy existing application files
 COPY . .
 
-# Install PHP dependencies with Composer
-RUN composer install --no-dev --optimize-autoloader
+# Clear Composer cache and install PHP dependencies
+RUN composer clear-cache
+RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-scripts --no-progress
 
 # Set permissions for Laravel storage and cache folders
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
