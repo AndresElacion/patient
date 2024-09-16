@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install Composer manually
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Set working directory
 WORKDIR /var/www/html
@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 # Copy existing application files
 COPY . .
 
-# Install PHP dependencies
+# Install PHP dependencies with Composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Set permissions for Laravel storage and cache folders
