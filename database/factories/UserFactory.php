@@ -25,10 +25,10 @@ class UserFactory extends Factory
     {
         return [
             'role_id' => 1,
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => 'super admin',
+            'email' => 'super@admin.com',
             'age' => 12,
-            'dateOfBirth' => fake()->date(),
+            'dateOfBirth' => date('Y-m-d'),
             'contactNumber' => '89123123',
             'gender' => 'male',
             'occupation' => 'Doctor',
