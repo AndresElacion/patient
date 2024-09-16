@@ -24,17 +24,17 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'role_id' => 1,
-            'name' => 'super admin',
-            'email' => 'super@admin.com',
-            'age' => 12,
-            'dateOfBirth' => date('Y-m-d'),
-            'contactNumber' => '89123123',
-            'gender' => 'male',
+            'role_id' => 1, // Assuming 1 is for "super admin"
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'age' => $this->faker->numberBetween(25, 65),
+            'dateOfBirth' => $this->faker->date(),
+            'contactNumber' => $this->faker->phoneNumber,
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'occupation' => 'Doctor',
-            'specialty' => 'treatment of brain',
+            'specialty' => 'treatment of brain', // You can make this dynamic too
             'department' => 'Neurology',
-            'address' => 'sample address',
+            'address' => $this->faker->address,
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
