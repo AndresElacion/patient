@@ -50,5 +50,5 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # Expose the port for Laravel to serve the application
 EXPOSE 8000
 
-# Run the Laravel migration and serve the application
-CMD ["docker-entrypoint.sh"]
+# Run the entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]

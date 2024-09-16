@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# Run Laravel migrations
-php artisan migrate --force
+# Wait for the database to be available
+echo "Waiting for the database..."
+until php artisan migrate:status; do
+  >&2 echo "Database is not available yet. Waiting..."
+  sleep 5
+done
 
-# Serve the application
-php artisan serve --host=0.0.0.0 --port=8000
+# Run Laravel migrations and seed the database
+php artisan migrate --force --seed
+
+# Start PHP-FPM
+php-fpm
