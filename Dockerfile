@@ -33,6 +33,8 @@ COPY . .
 # Install PHP dependencies
 RUN composer clear-cache
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-scripts --no-progress
+RUN composer require fakerphp/faker --dev
+
 
 # Install Node.js dependencies and build Vite assets
 RUN npm install
