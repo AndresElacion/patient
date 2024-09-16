@@ -16,31 +16,20 @@ RUN apt-get update && apt-get install -y \
 # Install Composer manually
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Check PHP and Composer versions
-RUN php -v
-RUN composer --version
-
 # Set working directory
 WORKDIR /var/www/html
 
 # Copy existing application files
 COPY . .
 
-# Clear Composer cache and install PHP dependencies
-RUN composer clear-cache
+# Install PHP dependencies with Composer
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-scripts --no-progress
 
 # Set permissions for Laravel storage and cache folders
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Copy the entrypoint script
-COPY ./docker-entrypoint.sh /usr/local/bin/
-
-# Make the entrypoint script executable
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-
 # Expose the port for Laravel to serve the application
 EXPOSE 8000
 
-# Run the Laravel migration and serve the application
-CMD ["docker-entrypoint.sh"]
+# Run the Laravel application
+CMD ["php-fpm"]
