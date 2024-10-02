@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             Roles::class,
         ]);
 
-        User::factory(10)->create();
+        User::factory(1)->create();
 
-        $this->call([
-            Attendance::class,
-        ]);
+        // $this->call([
+        //     Attendance::class,
+        // ]);
     }
 }
